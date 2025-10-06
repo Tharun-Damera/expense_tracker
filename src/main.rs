@@ -1,8 +1,8 @@
 use std::io;
 
-use user_commands::UserCommand;
+use user_cmd::UserCommand;
 
-pub mod user_commands;
+pub mod user_cmd;
 
 fn main() {
     println!("===========================");
