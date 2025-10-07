@@ -32,6 +32,12 @@ fn main() {
                 }
             },
             UserCommand::List => Expense::list(&expense_list),
+            UserCommand::Total => {
+                println!(
+                    "Your total expenditure is {}",
+                    Expense::total_expenditure(&expense_list)
+                );
+            }
             UserCommand::Exit => {
                 println!("GoodBye!");
                 break;

@@ -12,6 +12,7 @@ pub enum Category {
 
 impl Category {
     pub fn new() -> Self {
+        println!("\nCategories:");
         println!("1. Food");
         println!("2. Transport");
         println!("3. Entertainment");
@@ -19,7 +20,7 @@ impl Category {
         println!("5. Shopping");
         println!("6. Miscellaneous");
 
-        println!("Select the category: ");
+        println!("Select one of the above categories: ");
         let input = utils::read_input();
 
         match input.trim() {

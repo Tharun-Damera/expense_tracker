@@ -47,4 +47,8 @@ impl Expense {
             }
         }
     }
+
+    pub fn total_expenditure(expenses: &Vec<Expense>) -> f32 {
+        expenses.iter().map(|x| x.amount).sum()
+    }
 }
