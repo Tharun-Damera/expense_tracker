@@ -1,6 +1,6 @@
 use crate::utils;
 
-#[derive(Debug)]
+#[derive(Debug, PartialEq)]
 pub enum Category {
     Food,
     Transport,

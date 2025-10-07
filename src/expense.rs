@@ -51,4 +51,19 @@ impl Expense {
     pub fn total_expenditure(expenses: &Vec<Expense>) -> f32 {
         expenses.iter().map(|x| x.amount).sum()
     }
+
+    pub fn filter_by_category(expenses: &Vec<Expense>) {
+        let selected_category = Category::new();
+        let category_expenses: Vec<&Expense> = expenses
+            .iter()
+            .filter(|x| x.category == selected_category)
+            .collect();
+        if category_expenses.is_empty() {
+            println!("No expenses recorded in the selected category");
+        } else {
+            for expense in category_expenses {
+                println!("{:?}", expense);
+            }
+        }
+    }
 }

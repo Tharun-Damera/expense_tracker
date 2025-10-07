@@ -37,7 +37,8 @@ fn main() {
                     "Your total expenditure is {}",
                     Expense::total_expenditure(&expense_list)
                 );
-            }
+            },
+            UserCommand::Filter => Expense::filter_by_category(&expense_list),
             UserCommand::Exit => {
                 println!("GoodBye!");
                 break;
