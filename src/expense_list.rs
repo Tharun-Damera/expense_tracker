@@ -25,7 +25,7 @@ impl ExpenseList {
     }
 
     pub fn save_expense_list(expenses: &Vec<Expense>) -> Result<(), io::Error> {
-        let json = serde_json::to_string(expenses).expect("Failed to serialize");
+        let json = serde_json::to_string_pretty(expenses).expect("Failed to serialize");
         fs::write(JSON_FILE, json.as_bytes())?;
         Ok(())
     }

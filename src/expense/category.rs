@@ -1,4 +1,5 @@
 use serde::{Deserialize, Serialize};
+use std::fmt::{self, Display};
 
 use crate::utils;
 
@@ -10,6 +11,19 @@ pub enum Category {
     Bills,
     Shopping,
     Miscellaneous,
+}
+
+impl Display for Category {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        match self {
+            Category::Food => write!(f, "Food"),
+            Category::Transport => write!(f, "Transport"),
+            Category::Entertainment => write!(f, "Entertainment"),
+            Category::Bills => write!(f, "Bills"),
+            Category::Shopping => write!(f, "Shopping"),
+            Category::Miscellaneous => write!(f, "Miscellaneous"),
+        }
+    }
 }
 
 impl Category {

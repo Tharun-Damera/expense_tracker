@@ -1,3 +1,4 @@
+use std::fmt::{self, Display};
 use std::num::ParseFloatError;
 
 use chrono::Local;
@@ -15,6 +16,16 @@ pub struct Expense {
     category: Category,
     date: String,
     note: String,
+}
+
+impl Display for Expense {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(
+            f,
+            "[{}] {} • {} • {} • {}",
+            self.id, self.date, self.category, self.amount, self.note
+        )
+    }
 }
 
 impl Expense {
@@ -35,10 +46,7 @@ impl Expense {
         println!("Enter a note describing the expense: ");
         let note: String = utils::read_input().trim().to_string();
 
-        let mut id: u32 = 1;
-        if !expenses.is_empty() {
-            id += expenses[expenses.len()-1].id;
-        }
+        let id: u32 = expenses.last().map(|x| x.id + 1).unwrap_or(1);
         expenses.push(Self::new(id, amount, category, note));
         Ok(())
     }
@@ -48,8 +56,9 @@ impl Expense {
             println!("No expenses recorded yet.")
         } else {
             println!("These are your current expenses");
+            println!("[Id] Date • Category • Amount • Note");
             for expense in expenses {
-                println!("{:?}", expense);
+                println!("{}", expense);
             }
         }
     }
