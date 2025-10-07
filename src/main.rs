@@ -24,10 +24,9 @@ fn main() {
 
         let cmd = UserCommand::parse_input(&input);
         match cmd {
-            UserCommand::Add => match Expense::add() {
-                Ok(v) => {
-                    println!("Added {v:?}");
-                    expense_list.push(v);
+            UserCommand::Add => match Expense::add(&mut expense_list) {
+                Ok(_) => {
+                    println!("Expense is added.")
                 }
                 Err(_) => {
                     println!("Please enter a valid amount and try again!");

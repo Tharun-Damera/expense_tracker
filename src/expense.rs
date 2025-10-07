@@ -18,24 +18,29 @@ pub struct Expense {
 }
 
 impl Expense {
-    fn new(amount: f32, category: Category, note: String) -> Self {
+    fn new(id: u32, amount: f32, category: Category, note: String) -> Self {
         Expense {
-            id: 1,
-            amount: amount,
-            category: category,
+            id,
+            amount,
+            category,
             date: Local::now().to_rfc3339(),
-            note: note,
+            note,
         }
     }
 
-    pub fn add() -> Result<Self, ParseFloatError> {
+    pub fn add(expenses: &mut Vec<Expense>) -> Result<(), ParseFloatError> {
         println!("Enter the expense amount: ");
         let amount: f32 = utils::read_input().trim().parse()?;
         let category: Category = Category::new();
         println!("Enter a note describing the expense: ");
         let note: String = utils::read_input().trim().to_string();
 
-        Ok(Self::new(amount, category, note))
+        let mut id: u32 = 1;
+        if !expenses.is_empty() {
+            id += expenses[expenses.len()-1].id;
+        }
+        expenses.push(Self::new(id, amount, category, note));
+        Ok(())
     }
 
     pub fn list(expenses: &Vec<Expense>) {
