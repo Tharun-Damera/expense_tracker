@@ -36,4 +36,15 @@ impl Expense {
 
         Ok(Self::new(amount, category, note))
     }
+
+    pub fn list(expenses: &Vec<Expense>) {
+        if expenses.is_empty() {
+            println!("No expenses recorded yet.")
+        } else {
+            println!("These are your current expenses");
+            for expense in expenses {
+                println!("{:?}", expense);
+            }
+        }
+    }
 }

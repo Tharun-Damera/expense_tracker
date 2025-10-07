@@ -6,6 +6,7 @@ pub mod user_cmd;
 pub mod utils;
 
 fn main() {
+    let mut expense_list: Vec<Expense> = Vec::new();
     loop {
         println!("===========================");
         println!(" Rusty CLI Expense Tracker");
@@ -22,12 +23,19 @@ fn main() {
         let cmd = UserCommand::parse_input(&input);
         match cmd {
             UserCommand::Add => match Expense::add() {
-                Ok(v) => println!("Expense added: {v:#?}"),
-                Err(e) => {
+                Ok(v) => {
+                    println!("Added {v:?}");
+                    expense_list.push(v);
+                }
+                Err(_) => {
                     println!("Please enter a valid amount and try again!");
                 }
             },
-            UserCommand::Exit => break,
+            UserCommand::List => Expense::list(&expense_list),
+            UserCommand::Exit => {
+                println!("GoodBye!");
+                break;
+            }
             _ => println!("Feature is still under development"),
         }
     }
