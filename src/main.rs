@@ -1,7 +1,7 @@
-use std::io;
 
 use user_cmd::UserCommand;
 
+pub mod utils;
 pub mod user_cmd;
 
 fn main() {
@@ -15,11 +15,7 @@ fn main() {
     println!("5. Exit");
     println!("---------------------------");
     println!("Enter your choice: ");
-    let mut input = String::new();
-    io::stdin()
-        .read_line(&mut input)
-        .expect("Failed to read line");
-
-    let cmd = UserCommand::read_input(&input);
+    let input: String = utils::read_input();
+    let cmd = UserCommand::parse_input(&input);
     dbg!(cmd);
 }

@@ -9,7 +9,7 @@ pub enum UserCommand {
 }
 
 impl UserCommand {
-    pub fn read_input(input: &str) -> Self {
+    pub fn parse_input(input: &str) -> Self {
         match input.trim().to_lowercase().as_str() {
             "1" => UserCommand::Add,
             "2" => UserCommand::List,
