@@ -1,18 +1,19 @@
 use std::num::ParseFloatError;
 
-use chrono::{DateTime, Local};
+use chrono::Local;
+use serde::{Deserialize, Serialize};
 
 use crate::expense::category::Category;
 use crate::utils;
 
 pub mod category;
 
-#[derive(Debug)]
+#[derive(Serialize, Deserialize, Debug)]
 pub struct Expense {
     id: u32,
     amount: f32,
     category: Category,
-    date: DateTime<Local>,
+    date: String,
     note: String,
 }
 
@@ -22,7 +23,7 @@ impl Expense {
             id: 1,
             amount: amount,
             category: category,
-            date: Local::now(),
+            date: Local::now().to_rfc3339(),
             note: note,
         }
     }

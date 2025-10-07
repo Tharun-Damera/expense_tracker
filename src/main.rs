@@ -1,12 +1,14 @@
 use crate::expense::Expense;
+use crate::expense_list::ExpenseList;
 use crate::user_cmd::UserCommand;
 
 pub mod expense;
+pub mod expense_list;
 pub mod user_cmd;
 pub mod utils;
 
 fn main() {
-    let mut expense_list: Vec<Expense> = Vec::new();
+    let mut expense_list: Vec<Expense> = ExpenseList::load_expense_list();
     loop {
         println!("===========================");
         println!(" Rusty CLI Expense Tracker");
@@ -37,13 +39,15 @@ fn main() {
                     "Your total expenditure is {}",
                     Expense::total_expenditure(&expense_list)
                 );
-            },
+            }
             UserCommand::Filter => Expense::filter_by_category(&expense_list),
             UserCommand::Exit => {
+                ExpenseList::save_expense_list(&expense_list)
+                    .expect("Error while saving the expense list");
                 println!("GoodBye!");
                 break;
             }
-            _ => println!("Feature is still under development"),
+            UserCommand::Invalid => continue,
         }
     }
 }

@@ -1,6 +1,8 @@
+use serde::{Deserialize, Serialize};
+
 use crate::utils;
 
-#[derive(Debug, PartialEq)]
+#[derive(Serialize, Deserialize, Debug, PartialEq)]
 pub enum Category {
     Food,
     Transport,
